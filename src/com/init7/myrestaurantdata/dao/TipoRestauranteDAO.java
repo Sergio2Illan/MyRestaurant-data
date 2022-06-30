@@ -20,8 +20,9 @@ public interface TipoRestauranteDAO {
 	 * @param tipoRestaurante
 	 * @return 1o mas esta todo correcto, 0 se produjo un error
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	int guardar(TipoRestaurante tipoRestaurante) throws SQLException;
+	int guardar(TipoRestaurante tipoRestaurante) throws SQLException, ClassNotFoundException;
 	
 	
 	
@@ -45,8 +46,10 @@ public interface TipoRestauranteDAO {
 	/**
 	 * 
 	 * @return lista de tipos de restaurante o null que no hay
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	List<TipoRestaurante> consultar();
+	List<TipoRestaurante> consultar() throws ClassNotFoundException, SQLException;
 	
 	
 	/**

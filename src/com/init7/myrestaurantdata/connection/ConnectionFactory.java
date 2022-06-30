@@ -54,6 +54,7 @@ public class ConnectionFactory {
 		System.out.println("QUERY  -----> "+query);
 		int result = statement.executeUpdate(query);
 		
+		
 		return result;
 	}
 	
@@ -62,6 +63,10 @@ public class ConnectionFactory {
 		System.out.println("QUERY  -----> "+query);
 		
 		return statement.executeQuery(query);
+	}
+	
+	public static Connection getConnection() { 
+		return connection;
 	}
 	
 	

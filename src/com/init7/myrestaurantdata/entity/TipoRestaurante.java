@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class TipoRestaurante extends CommonEntity{
 	
-	private String idTipoRestaurante;
+	private int idTipoRestaurante;
 	private String descripcion;
 	private List<Restaurante> listadoRestaurantes;
 	
@@ -26,7 +26,7 @@ public class TipoRestaurante extends CommonEntity{
 	}
 
 
-	public TipoRestaurante(LocalDateTime fechaCreacion, LocalDateTime fechaModificacion, boolean estado, String idTipoRestaurante, String descripcion, List<Restaurante> listadoRestaurantes) {
+	public TipoRestaurante(LocalDateTime fechaCreacion, LocalDateTime fechaModificacion, boolean estado, int idTipoRestaurante, String descripcion, List<Restaurante> listadoRestaurantes) {
 		super(fechaCreacion, fechaModificacion, estado);
 		this.idTipoRestaurante = idTipoRestaurante;
 		this.descripcion = descripcion;
@@ -34,7 +34,7 @@ public class TipoRestaurante extends CommonEntity{
 	}
 
 
-	public TipoRestaurante(String idTipoRestaurante, String descripcion, List<Restaurante> listadoRestaurantes) {
+	public TipoRestaurante(int idTipoRestaurante, String descripcion, List<Restaurante> listadoRestaurantes) {
 		super();
 		this.idTipoRestaurante = idTipoRestaurante;
 		this.descripcion = descripcion;
@@ -42,12 +42,12 @@ public class TipoRestaurante extends CommonEntity{
 	}
 
 
-	public String getIdTipoRestaurante() {
+	public int getIdTipoRestaurante() {
 		return idTipoRestaurante;
 	}
 
 
-	public void setIdTipoRestaurante(String idTipoRestaurante) {
+	public void setIdTipoRestaurante(int idTipoRestaurante) {
 		this.idTipoRestaurante = idTipoRestaurante;
 	}
 

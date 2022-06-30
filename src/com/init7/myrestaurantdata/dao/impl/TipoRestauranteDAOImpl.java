@@ -3,7 +3,9 @@
  */
 package com.init7.myrestaurantdata.dao.impl;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.init7.myrestaurantdata.connection.ConnectionFactory;
@@ -16,7 +18,7 @@ import com.init7.myrestaurantdata.entity.TipoRestaurante;
  */
 public class TipoRestauranteDAOImpl implements TipoRestauranteDAO{
 	
-	static { //Este bloque se ejecuta cuando se instancia la clase no antes
+	/*static { //Este bloque se ejecuta cuando se instancia la clase no antes
 		try {
 			
 			
@@ -27,13 +29,21 @@ public class TipoRestauranteDAOImpl implements TipoRestauranteDAO{
 			e.printStackTrace();
 			System.err.println("Error: ---> "+e.getMessage());
 		}
-	}
+	}*/
 
 	@Override
-	public int guardar(TipoRestaurante tipoRestaurante) throws SQLException {
+	public int guardar(TipoRestaurante tipoRestaurante) throws SQLException, ClassNotFoundException {
+		
 			String sql = "INSERT INTO TIPO_RESTAURANTE (DESCRIPCION, FECHACREACION, ESTATUS) VALUES "
 					+ "('"+tipoRestaurante.getDescripcion()+"', "+tipoRestaurante.getFechaCreacion()+"', "+tipoRestaurante.isEstado()+");";
-		return ConnectionFactory.executeSQL(sql);
+		
+			ConnectionFactory.conectar();
+			
+			int guardado = ConnectionFactory.executeSQL(sql);
+		
+		ConnectionFactory.getConnection().close();
+		
+		return guardado;
 	}
 
 	@Override
@@ -49,9 +59,36 @@ public class TipoRestauranteDAOImpl implements TipoRestauranteDAO{
 	}
 
 	@Override
-	public List<TipoRestaurante> consultar() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TipoRestaurante> consultar() throws ClassNotFoundException, SQLException {
+		
+		
+		String sql = "SELECT * FROM tipo_restaurante ORDER BY descripcion";
+		
+		ConnectionFactory.conectar();
+		
+		ResultSet rs = ConnectionFactory.executeSelect(sql);
+		
+		List<TipoRestaurante> lista = new ArrayList<TipoRestaurante>();
+		
+		
+		if(rs != null) {
+			
+			while(rs.next()) {
+				TipoRestaurante  tp = new TipoRestaurante();
+				tp.setIdTipoRestaurante(rs.getInt("idTipoDescripcion"));
+				tp.setDescripcion(rs.getString("descripcion"));
+				tp.setFechaCreacion(rs.getTimestamp("fechaCreacion").toLocalDateTime());
+				tp.setEstado(rs.getBoolean("estatus"));
+				
+				
+				lista.add(tp);
+			}
+			
+		}
+		
+		ConnectionFactory.getConnection().close();
+		
+		return lista;
 	}
 
 	@Override

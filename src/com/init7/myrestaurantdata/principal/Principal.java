@@ -59,7 +59,7 @@ public class Principal {
 				System.err.println("NO se ha podido guardar en la BBDD.");
 			}
 			
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.err.println("ERROR ---> "+e.getMessage());
