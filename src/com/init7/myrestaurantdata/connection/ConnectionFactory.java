@@ -5,7 +5,9 @@ package com.init7.myrestaurantdata.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * @author sergioillanillan
@@ -20,6 +22,7 @@ public class ConnectionFactory {
 	 * Se encarga de mantener la conexion con la BBDD
 	 */
 	private static  Connection connection;
+	private static Statement statement;
 	
 	
 	/**
@@ -40,8 +43,25 @@ public class ConnectionFactory {
 		
 		connection = DriverManager.getConnection(url, user, password);
 		
+		statement = connection.createStatement();
+		
 		return connection;
 		
+	}
+	
+	
+	public static int executeSQL(String query) throws SQLException {
+		System.out.println("QUERY  -----> "+query);
+		int result = statement.executeUpdate(query);
+		
+		return result;
+	}
+	
+	
+	public static ResultSet executeSelect(String query) throws SQLException {
+		System.out.println("QUERY  -----> "+query);
+		
+		return statement.executeQuery(query);
 	}
 	
 	
